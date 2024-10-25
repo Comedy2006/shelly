@@ -1,3 +1,18 @@
+/*
+
+This is just a simple hobby project. Not too big, not too small
+
+Things I'd like to add in the future
+
+Custom scripting language for the terminal
+Administrative tools
+Besides the windows commands, I also want to make some custom commands
+
+I also want to add some side projects into this one (e.g. mbrData)
+
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -16,20 +31,10 @@ char* get_user(){
 
 int main(int argc, char** argv){
 
-    char* cwd = getcwd(NULL, 0);
-    if(cwd == NULL){
-        perror("getcwd err");
-        return ERROR_INVALID_FUNCTION;
-    }
-
-    char* usr = get_user();
-
-    printf("{User: %s} - [%s]\n", usr, cwd);
-    printf("Shell>");
-
-    // userinput... need to do that but I am too lazy rn    
+    scanf("%255s");
 
     free(usr);
     free(cwd);
+
     return ERROR_SUCCESS;
 }
