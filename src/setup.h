@@ -1,8 +1,21 @@
+#pragma once
+
 #define MAX_INPUT_SIZE 1024
 #define MAX_NUM_ARGS 100
 
+// acquire username
+char* get_user(){
+    char* username = (char*)malloc(256*sizeof(char));
+    DWORD username_len = sizeof(username);
+
+    GetUserName(username, &username_len);
+
+    return username;
+}
+
 // reading user input
 char* read_input(){
+
     char* input = (char*)malloc(MAX_INPUT_SIZE);
 
     if (input == NULL) {
@@ -49,7 +62,9 @@ char** parse_input(char* input){
 
 void shell_cmd(){
     
+    char** usrinput;
     char* cwd = getcwd(NULL, 0);
+
     if(cwd == NULL){
         perror("getcwd err");
         return;
@@ -59,4 +74,8 @@ void shell_cmd(){
 
     printf("{User: %s} - [%s]\n", usr, cwd);
     printf("Shell>");
+
+    usrinput = parse_input(read_input());
+
+    exec_cmd(usrinput);
 }

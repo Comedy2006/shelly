@@ -12,29 +12,20 @@ I also want to add some side projects into this one (e.g. mbrData)
 
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <string.h>
 #include <direct.h>
+#include "setup.h"
 #include "commands.h"
-
-char* get_user(){
-    char* username = (char*)malloc(256*sizeof(char));
-    DWORD username_len = sizeof(username);
-
-    GetUserName(username, &username_len);
-
-    return username;
-}
+#include "cmd.h"
 
 int main(int argc, char** argv){
 
-    scanf("%255s");
+    printf("\033[H\033[J");
 
-    free(usr);
-    free(cwd);
+    shell_cmd();
 
     return ERROR_SUCCESS;
 }
