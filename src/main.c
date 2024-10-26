@@ -8,7 +8,7 @@ Custom scripting language for the terminal
 Administrative tools
 Besides the windows commands, I also want to make some custom commands
 
-I also want to add some side projects into this one (e.g. mbrData)
+I also want to add some side projects into this one
 
 */
 
