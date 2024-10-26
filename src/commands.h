@@ -8,12 +8,13 @@ void help_cmd(){
     "help\n"
     "exit\n"
     "clear/cls\n");
+    return;
 }
 
 int shutdown_imm(char** args){
 
     // acquire priviledges for shutdown
-    HANDLE hTocken;
+    HANDLE hToken;
     TOKEN_PRIVILEGES tkp;
 
     if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken)) {
@@ -61,6 +62,51 @@ int shutdown_imm(char** args){
 
         // missing features: scheduled shutdown
     }
+
+    free(args);
+    return ERROR_SUCCESS;
+}
+
+int cmd_cmd(char** args){
+
+    if(sizeof(args) == 1){
+        perror("Command should have at least 1 more argument to work.");
+        return EXIT_FAILURE;
+    }
+
+    // put string together
+    // execute using system()
+    char* str;
+    int strlen = 0;
+
+    for(int i = 0; i <= sizeof(args) - 1; i++){
+        strlen += sizeof(args[i]); 
+    }
+
+    strlen++; // for null terminator
+    strlen += ((sizeof(args)/sizeof(args[0])) - 1);
+
+    str = (char*)malloc(strlen*sizeof(char));
+    if (str == NULL){
+        perror("Memory could not be allocated (str)");
+        return EXIT_FAILURE;
+    }
+
+    str[0] = '\0';
+
+    //putting str together
+    for(int i = 1; i <= ((sizeof(args)/sizeof(args[0])) + 1) - 1; i++){
+        strcat(str, args[i]);
+        if (i < (sizeof(args)/sizeof(args[0]))){
+            strcat(str, " ");
+        }
+    }
+
+    str[sizeof(str) - 1] = '\0';
+    printf("%s\n", str);
+
+    //system(str);
+    free(str); // imma do this tomorrow
 
     return ERROR_SUCCESS;
 }

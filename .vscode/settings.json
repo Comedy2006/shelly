@@ -3,7 +3,8 @@
         "direct.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "windows.h": "c"
+        "windows.h": "c",
+        "cmd.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

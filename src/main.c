@@ -17,13 +17,14 @@ I also want to add some side projects into this one
 #include <windows.h>
 #include <string.h>
 #include <direct.h>
+#include <stdbool.h>
 #include "setup.h"
 #include "commands.h"
 #include "cmd.h"
 
 int main(int argc, char** argv){
 
-    printf("\033[H\033[J");
+    printf("\033[H\033[J"); // clearing screen
 
     shell_cmd();
 

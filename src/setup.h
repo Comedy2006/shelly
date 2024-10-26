@@ -3,6 +3,9 @@
 #define MAX_INPUT_SIZE 1024
 #define MAX_NUM_ARGS 100
 
+// read config
+// WIP
+
 // acquire username
 char* get_user(){
     char* username = (char*)malloc(256*sizeof(char));

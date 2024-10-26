@@ -19,6 +19,7 @@ attr
 mkdir
 rmdir
 ping
+cmd - execute commands in cmd
 
 custom commands: 
 trust
@@ -33,6 +34,10 @@ void exec_cmd(char** args){
 
     if (strcmp(args[0], "clear") == 0 || strcmp(args[0], "cls") == 0){
         printf("\033[H\033[J");
+        free(args);
+    }
+    else if(strcmp(args[0], "cmd") == 0){
+        cmd_cmd(args);
         free(args);
     }
     else if (strcmp(args[0], "exit") == 0){
