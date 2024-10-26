@@ -1,12 +1,12 @@
 /*
 Commands:
 
-exit
+exit - done
 ls
-shutdown
+shutdown - halfway through
 print
 cd
-cls
+cls - done
 del
 tree
 registry
@@ -19,11 +19,11 @@ attr
 mkdir
 rmdir
 ping
-cmd - execute commands in cmd
+cmd - done
 
 custom commands: 
-trust
-mbr
+trust - WIP
+mbr - WIP
 */
 
 #pragma once
@@ -49,6 +49,10 @@ void exec_cmd(char** args){
         help_cmd();
         free(args);
     }
+    else if(strcmp(args[0], "mbr") == 0){
+        printf("WIP");
+        free(args);
+    }
     else if (strcmp(args[0], "shutdown") == 0){
         check = shutdown_imm(args); // normally, the system would shut down. We'll still do the error handling
         free(args); 
@@ -57,6 +61,8 @@ void exec_cmd(char** args){
         printf("%s: Command not found. Type 'help' to see a list of available commands.\n", args[0]);
         free(args);
     }
+
+    printf("\n");
 
     shell_cmd();
 }

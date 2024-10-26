@@ -69,8 +69,8 @@ int shutdown_imm(char** args){
 
 int cmd_cmd(char** args){
 
-    if(sizeof(args) == 1){
-        perror("Command should have at least 1 more argument to work.");
+    if(args[0] == NULL || args[1] == NULL){
+        printf("Command should have at least 1 more argument to work.");
         return EXIT_FAILURE;
     }
 
@@ -79,12 +79,11 @@ int cmd_cmd(char** args){
     char* str;
     int strlen = 0;
 
-    for(int i = 0; i <= sizeof(args) - 1; i++){
-        strlen += sizeof(args[i]); 
+    for(int i = 0; args[i] != NULL; i++){
+        strlen += sizeof(args[i]) + 1; 
     }
 
     strlen++; // for null terminator
-    strlen += ((sizeof(args)/sizeof(args[0])) - 1);
 
     str = (char*)malloc(strlen*sizeof(char));
     if (str == NULL){
@@ -95,15 +94,16 @@ int cmd_cmd(char** args){
     str[0] = '\0';
 
     //putting str together
-    for(int i = 1; i <= ((sizeof(args)/sizeof(args[0])) + 1) - 1; i++){
+    for(int i = 1; args[i] != NULL; i++){
         strcat(str, args[i]);
-        if (i < (sizeof(args)/sizeof(args[0]))){
+        if (args[i+1] != NULL){
             strcat(str, " ");
         }
     }
 
-    str[sizeof(str) - 1] = '\0';
-    printf("%s\n", str);
+    str[strlen-1] = '\0';
+
+    system(str);
 
     //system(str);
     free(str); // imma do this tomorrow
