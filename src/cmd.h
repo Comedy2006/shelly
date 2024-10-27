@@ -54,7 +54,7 @@ void exec_cmd(char** args){
         free(args);
     }
     else if (strcmp(args[0], "shutdown") == 0){
-        check = shutdown_imm(args); // normally, the system would shut down. We'll still do the error handling
+        check = shutdown_imm(args);
         free(args); 
     }
     else{
