@@ -57,6 +57,10 @@ void exec_cmd(char** args){
         check = shutdown_imm(args);
         free(args); 
     }
+    else if(strcmp(args[0], "ssid") == 0){
+        ssid_cmd(args);
+        free(args);
+    }
     else{
         printf("%s: Command not found. Type 'help' to see a list of available commands.\n", args[0]);
         free(args);

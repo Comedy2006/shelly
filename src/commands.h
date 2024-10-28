@@ -70,7 +70,7 @@ int shutdown_imm(char** args){
 int cmd_cmd(char** args){
 
     if(args[0] == NULL || args[1] == NULL){
-        printf("Command should have at least 1 more argument to work.");
+        printf("Usage: cmd [command]");
         return EXIT_FAILURE;
     }
 
@@ -109,4 +109,38 @@ int cmd_cmd(char** args){
     free(str); // imma do this tomorrow
 
     return ERROR_SUCCESS;
+}
+
+bool ssid_cmd(char** args){
+
+    if(args[1] == NULL){
+        printf("Usage: ssid [ssid]");
+        return FALSE;
+    }
+
+    SID_NAME_USE sidType;
+    char userName[256], domainName[256];
+    DWORD userNameSize = sizeof(userName);
+    DWORD domainNameSize = sizeof(domainName);
+
+    // Example SID in SDDL (replace this with actual SID)
+    char *sidString = args[1];  
+    PSID pSid = NULL;
+
+    if (!ConvertStringSidToSidA(sidString, &pSid)) {
+        printf("Failed to convert SID string. Error: %lu\n", GetLastError());
+        return FALSE;
+    }
+
+    // Lookup the account name from the SID
+    if (LookupAccountSidA(NULL, pSid, userName, &userNameSize, domainName, &domainNameSize, &sidType)) {
+        printf("User Name: %s\n", userName);
+        printf("Domain Name: %s\n", domainName);
+    } else {
+        printf("LookupAccountSid failed. Error: %lu\n", GetLastError());
+    }
+
+    LocalFree(pSid);
+
+    return TRUE;
 }
