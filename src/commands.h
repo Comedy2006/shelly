@@ -123,7 +123,6 @@ bool ssid_cmd(char** args){
     DWORD userNameSize = sizeof(userName);
     DWORD domainNameSize = sizeof(domainName);
 
-    // Example SID in SDDL (replace this with actual SID)
     char *sidString = args[1];  
     PSID pSid = NULL;
 
